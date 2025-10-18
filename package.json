@@ -1,6 +1,6 @@
 {
   "name": "shocket",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A user-friendly wrapper for the PiShock websocket API.",
   "main": "build/lib.js",
   "types": "types/lib.d.ts",
