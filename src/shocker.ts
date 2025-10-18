@@ -72,6 +72,9 @@ export class Shocker {
     this.socket?.send(JSON.stringify(command))
   }
 
+  /**
+   * Validates ownership (or non-ownership) of the given shocker
+   */
   async #verify(username: string, apiKey: string, id: number): Promise<boolean> {
     const authUrl = new URL("/Auth/GetUserIfAPIKeyValid", AUTH_URL_BASE)
     authUrl.searchParams.append("username", username)
@@ -183,14 +186,29 @@ export class Shocker {
     this.send(c)
   }
 
+  /**
+   * Send a shock command to the shocker
+   * @param intensity `0`-`100`
+   * @param duration time in milliseconds
+   */
   shock(intensity: number, duration: number) {
     this.#do(Mode.Shock, intensity, duration)
   }
 
+  /**
+   * Send a vibrate command to the shocker
+   * @param intensity `0`-`100`
+   * @param duration time in milliseconds
+   */
   vibrate(intensity: number, duration: number) {
     this.#do(Mode.Vibrate, intensity, duration)
   }
 
+  /**
+   * Send a beep command to the shocker
+   * @param intensity `0`-`100`
+   * @param duration time in milliseconds
+   */
   beep(intensity: number, duration: number) {
     this.#do(Mode.Beep, intensity, duration)
   }

@@ -14,6 +14,11 @@ export class ShockHub {
     return this
   }
 
+  /**
+   * Retrieve all of the shockers connected to the hub and attempt to connect to all of them
+   * @param username 
+   * @param apiKey 
+   */
   async init(username: string, apiKey: string) {
     const authUrl = new URL("/Auth/GetUserIfAPIKeyValid", AUTH_URL_BASE)
     authUrl.searchParams.append("username", username)
@@ -68,10 +73,20 @@ export class ShockHub {
     return this.#userId
   }
 
+  /**
+   * Retrieve a shocker by it's ID
+   * @param id 
+   * @returns `Shocker` if it's found, `undefined` if it isn't
+   */
   shocker(id: number): Shocker | undefined {
     return this.#shockers.get(id)
   }
 
+  /**
+   * Retrieve a shocker by it's name
+   * @param name 
+   * @returns `Shocker` if it's found, `undefined` if it isn't
+   */
   shockerByName(name: string): Shocker | null {
     let out: Shocker | null = null
 
@@ -82,6 +97,10 @@ export class ShockHub {
     return out
   }
 
+  /**
+   * Retrieve a map of all owned shockers
+   * @returns
+   */
   allShockers(): Map<number, Shocker> {
     return this.#shockers
   }

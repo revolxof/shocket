@@ -295,31 +295,6 @@ export class CommandBuilder {
       case OperationKind.Unsubscribe: return this.#buildUnsubscribe()
 
     }
-    // const cmd: ICommand = {
-    //   "Operation": this.#operation,
-    //   "PublishCommands": [
-    //     {
-    //       "Target": this.#target,
-    //       "Body": {
-    //         "id": this.#shockerId,
-    //         "m": this.#mode,
-    //         "i": this.#intensity,
-    //         "d": this.#duration,
-    //         "r": this.#repeating,
-    //         "l":
-    //         {
-    //           "u": this.#userId,
-    //           "ty": this.#kind,
-    //           "w": this.#warningFlag,
-    //           "h": this.#hold,
-    //           "o": this.#origin
-    //         }
-    //       }
-    //     }
-    //   ]
-    // }
-
-    // return cmd
   }
 }
 
