@@ -12,12 +12,12 @@ export interface IUserIDResponse {
   IPAddress: null;
   Sessions: null;
   Emails: null;
-  APIKeys: APIKey[];
+  APIKeys: IAPIKey[];
   OAuthLinks: null;
   AccessPermissions: null;
 }
 
-export interface APIKey {
+export interface IAPIKey {
   UserAPIKeyId: number;
   User: null;
   APIKey: string;
