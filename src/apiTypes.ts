@@ -56,6 +56,7 @@ export enum Mode {
 
   /**
    * Special command mode for signaling the end of a "continuous" (`Body.l.h: true`) command
+   * You are able to start a continuous command by calling `.withContinuous(true)`
    */
   EndContinuous = "e",
 }
