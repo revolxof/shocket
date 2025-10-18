@@ -75,8 +75,8 @@ export class CommandBuilder {
    * @param repeating defaults to true on the api
    * @returns
    */
-  setRepeating(repeating: boolean): this {
-    this.#repeating = repeating
+  withRepeating(repeating: boolean | null): this {
+    this.#repeating = repeating ?? true
     return this
   }
 
@@ -136,8 +136,8 @@ export class CommandBuilder {
    * @param warning signals whether or not this is a warning vibration for logging purposes
    * @returns 
    */
-  withWarningFlag(warning: boolean): this {
-    this.#warningFlag = warning
+  withWarningFlag(warning: boolean | null): this {
+    this.#warningFlag = warning ?? true
     return this
   }
 
@@ -146,8 +146,8 @@ export class CommandBuilder {
    * @param held true if button is held or continuous is being sent
    * @returns 
    */
-  withHeld(held: boolean): this {
-    this.#hold = held
+  withContinuous(held: boolean | null): this {
+    this.#hold = held ?? true
     return this
   }
 
