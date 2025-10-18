@@ -5,6 +5,10 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "lib": ["es2024"],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./types",
+    "outDir": "./build"
   }
 }

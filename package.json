@@ -1,12 +1,21 @@
 {
-  "name": "shock.ts",
+  "name": "shocket",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A user-friendly wrapper for the PiShock websocket API.",
+  "main": "build/lib.js",
+  "types": "types/lib.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepack": "tsc",
+    "postpack": "rm -rf build types"
   },
-  "keywords": [],
+  "keywords": [
+    "PiShock",
+    "websocket",
+    "wrapper",
+    "shockcollar",
+    "shock",
+    "collar"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -17,7 +26,6 @@
     "@stylistic/eslint-plugin": "^5.5.0",
     "@types/ws": "^8.18.1",
     "eslint": ">=9.33.0",
-    "eslint-config-xo": "^0.49.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1"
   }

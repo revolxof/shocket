@@ -1,4 +1,4 @@
 node_modules/
-shock.js
-shock.js.map
+types/
+build/
 test.js
