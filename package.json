@@ -17,7 +17,8 @@
     "shock",
     "collar"
   ],
-  "author": "",
+  "author": "revolxof",
+  "repository": {"url": "https://github.com/revolxof/shocket"},
   "license": "MIT",
   "dependencies": {
     "ws": "^8.18.2"

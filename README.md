@@ -4,6 +4,13 @@ bzzt zap vrrr buzz beep, et al.
 
 Pull requests and issues welcome!
 
+<img src="https://img.shields.io/npm/v/:shocket" />
+<img src="https://img.shields.io/github/sponsors/revolxof?link=https%3A%2F%2Fgithub.com%2Fsponsors%2Frevolxof
+" />
+<img src="https://img.shields.io/npm/l/:shocket" />
+<img src="https://img.shields.io/bundlephobia/min/shocket">
+<img src="https://img.shields.io/npm/dw/shocket">
+
 ## Usage
 
 ```
