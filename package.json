@@ -8,6 +8,7 @@
     "prepack": "tsc",
     "postpack": "rm -rf build types"
   },
+  "files": ["build", "types"],
   "keywords": [
     "PiShock",
     "websocket",
