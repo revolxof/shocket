@@ -15,7 +15,7 @@ export class CommandBuilder {
   #userId: number | null = null
   #kind: CallKind = CallKind.Normal
   #warningFlag = false
-  #hold = false
+  #continuous = false
   #origin = ""
   #shockerId: number | null = null
   #subTargets: SubscriptionTargets
@@ -147,7 +147,7 @@ export class CommandBuilder {
    * @returns 
    */
   withContinuous(held: boolean | null): this {
-    this.#hold = held ?? true
+    this.#continuous = held ?? true
     return this
   }
 
@@ -189,7 +189,7 @@ export class CommandBuilder {
    */
   withConfig(config: IConfig): this {
     this.#duration = config.duration ?? this.#duration
-    this.#hold = config.hold ?? this.#hold
+    this.#continuous = config.continuous ?? this.#continuous
     this.#intensity = config.intensity ?? this.#intensity
     this.#mode = config.mode ?? this.#mode
     this.#operation = config.operation ?? this.#operation
@@ -266,7 +266,7 @@ export class CommandBuilder {
               "u": this.#userId,
               "ty": this.#kind,
               "w": this.#warningFlag,
-              "h": this.#hold,
+              "h": this.#continuous,
               "o": this.#origin,
             },
           },
@@ -352,7 +352,7 @@ export interface IConfig {
   /**
    * True if button is held or continuous is being sent
    */
-  hold?: boolean;
+  continuous?: boolean;
 
   /**
    * Name shown in logs
