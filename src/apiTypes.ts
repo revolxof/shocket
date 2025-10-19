@@ -55,7 +55,7 @@ export enum Mode {
   Beep = "b",
 
   /**
-   * Special command mode for signaling the end of a "continuous" (`Body.l.h: true`) command
+   * Special command mode for signaling the end of a "continuous" (`Body.l.h: true`) command  
    * You are able to create a continuous command by calling `.withContinuous()` on an instance of `CommandBuilder`
    */
   EndContinuous = "e",

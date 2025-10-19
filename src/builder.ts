@@ -293,7 +293,6 @@ export class CommandBuilder {
       case OperationKind.Publish: return this.#buildPublish()
       case OperationKind.Subscribe: return this.#buildSubscribe()
       case OperationKind.Unsubscribe: return this.#buildUnsubscribe()
-
     }
   }
 }
