@@ -247,8 +247,8 @@ export class CommandBuilder {
   }
 
   #buildPublish(): IPublishCommand {
-    if (!this.#shockerId) throw new Error("")
-    if (!this.#userId) throw new Error("")
+    if (!this.#shockerId) throw new Error("Tried to build a publish command but there was no shocker ID")
+    if (!this.#userId) throw new Error("Tried to build a publish command but there was no user ID")
 
     return {
       "Operation": this.#operation,
