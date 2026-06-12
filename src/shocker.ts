@@ -1,22 +1,24 @@
 import { Command, CommandBuilder } from "./builder"
 import { API_URL_BASE, AUTH_URL_BASE, IDevicesResponse, IUserIDResponse, Mode, WS_URL_BASE } from "./apiTypes"
 import { WebSocket } from "ws"
+import { AuthHeaderKind, HeaderProvider } from "./http"
 
 export class Shocker {
   socket: WebSocket | null
 
-  #name: string
-  #id: number
-  #hubId: number
-  #userId: number
-  #type: number
-  #isPaused: boolean
+  #name!: string
+  #id!: number
+  #hubId!: number
+  #userId!: number
+  #type!: number
+  #isPaused!: boolean
+  #headerProvider!: HeaderProvider
   /**
    * @todo implement proper code for handling sharecodes
    */
   #kind: ShockerKind = ShockerKind.Owned
   #shareCode: string | null = null
-  #socketReady: PromiseWithResolvers<void>
+  #socketReady!: PromiseWithResolvers<void>
 
   /**
    * Basic shocker interface
@@ -76,19 +78,24 @@ export class Shocker {
    * Validates ownership (or non-ownership) of the given shocker
    */
   async #verify(username: string, apiKey: string, id: number): Promise<boolean> {
+    this.#headerProvider = new HeaderProvider().withApiKey(apiKey)
+
     const authUrl = new URL("/Auth/GetUserIfAPIKeyValid", AUTH_URL_BASE)
     authUrl.searchParams.append("username", username)
     authUrl.searchParams.append("apikey", apiKey)
 
-    const authRes = await fetch(authUrl)
+    const authRes = await fetch(authUrl, {headers: this.#headerProvider.auth(AuthHeaderKind.ApiKey)})
+
     const authJson = await authRes.json() as IUserIDResponse
+
+    this.#headerProvider = this.#headerProvider.withUserId(authJson.UserId.toString())
 
     const devicesUrl = new URL("/PiShock/GetUserDevices", API_URL_BASE)
     devicesUrl.searchParams.append("UserId", authJson.UserId.toString())
     devicesUrl.searchParams.append("Token", apiKey)
     devicesUrl.searchParams.append("api", "true")
 
-    const deviceRes = await fetch(devicesUrl)
+    const deviceRes = await fetch(devicesUrl, {headers: this.#headerProvider.authUserId(AuthHeaderKind.Token)})
     const deviceJson = await deviceRes.json() as IDevicesResponse[]
 
     const ownsThisShocker = deviceJson.some(d =>

@@ -8,6 +8,7 @@
     "strictNullChecks": true,
     "declaration": true,
     "declarationMap": true,
+    "rootDir": "./src",
     "declarationDir": "./types",
     "outDir": "./build"
   }

@@ -18,7 +18,7 @@ export class CommandBuilder {
   #continuous = false
   #origin = ""
   #shockerId: number | null = null
-  #subTargets: SubscriptionTargets
+  #subTargets!: SubscriptionTargets
 
   constructor() {
     return this

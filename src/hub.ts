@@ -1,11 +1,13 @@
 import { API_URL_BASE, AUTH_URL_BASE, IDevicesResponse, IUserIDResponse } from "./apiTypes"
 import { Shocker, ShockerKind } from "./shocker"
+import { AuthHeaderKind, HeaderProvider } from "./http"
 
 export class ShockHub {
   #clientId: number
-  #name: string
-  #userId: number
-  #username: string
+  #name!: string
+  #userId!: number
+  #username!: string
+  #headerProvider!: HeaderProvider
   #shockers = new Map<number, Shocker>()
 
   constructor(hubId: number) {
@@ -23,8 +25,10 @@ export class ShockHub {
     const authUrl = new URL("/Auth/GetUserIfAPIKeyValid", AUTH_URL_BASE)
     authUrl.searchParams.append("username", username)
     authUrl.searchParams.append("apikey", apiKey)
+
+    this.#headerProvider = new HeaderProvider().withApiKey(apiKey)
     
-    const authRes = await fetch(authUrl)
+    const authRes = await fetch(authUrl, {headers: this.#headerProvider.auth(AuthHeaderKind.ApiKey)})
     const userIDres = await authRes.json() as IUserIDResponse
     
     this.#userId = userIDres.UserId
@@ -35,7 +39,7 @@ export class ShockHub {
     devicesUrl.searchParams.append("Token", apiKey)
     devicesUrl.searchParams.append("api", "true")
 
-    const devicesRes = await fetch(devicesUrl)
+    const devicesRes = await fetch(devicesUrl, {headers: this.#headerProvider.authUserId(AuthHeaderKind.Token)})
     const devices = await devicesRes.json() as IDevicesResponse[]
 
     const hub = devices.find(e => e.clientId === this.#clientId)
